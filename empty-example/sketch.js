@@ -47,6 +47,17 @@ function RegisterCurrentXandYtoPrevious(){
   previousy=y;
   
 }
+
+function drawCircles(){
+  ellipse(x,y,2*radius);
+  noFill();
+}
+function calculateNewXandYforFourier()
+{
+  x= radius*cos(angle*n)+x;
+  y=radius*sin(angle*n)+y;
+
+}
 function FourierSolves(){
   setupForFourierSolves();
   addSliderForAmountCircle();
@@ -54,19 +65,17 @@ function FourierSolves(){
   for(let i=0;i<boundry;i++){
   radius=(4/(Math.PI*n)) * 50;
   RegisterCurrentXandYtoPrevious();
-  ellipse(x,y,2*radius);
-    
-  noFill();
-
-  x= radius*cos(angle*n)+x;
-  y=radius*sin(angle*n)+y;
-
-  drawLineCircleCenterToCircleCenter();
+  drawFourier();
   n=n+2;
 
 }
+//ONLY LAST Y VALUE !
 wave.unshift(y);
-
+}
+function drawFourier(){
+  drawCircles();
+  calculateNewXandYforFourier();
+  drawLineCircleCenterToCircleCenter();
 }
 
 function drawLineCircleCenterToCircleCenter(){
